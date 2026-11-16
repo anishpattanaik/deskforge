@@ -244,12 +244,24 @@ body { background: var(--ink); font-family: var(--sans); overflow-x: hidden; }
 .front-text { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 .front-text input { width: 150px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; font-size: 12px; }
 
+/* ---------- static (GitHub Pages) generator ---------- */
+.run-local { border-color: #4a3a28; background: linear-gradient(180deg, #1c1813, var(--panel)); display: flex; flex-direction: column; gap: 10px; }
+.run-local h3 { font-size: 18px; line-height: 1.25; }
+.run-local p { font-size: 14px; line-height: 1.55; }
+.run-local a:not(.btn) { color: var(--accent); }
+.run-steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5; }
+.run-steps code, .run-local code { font-family: var(--mono); font-size: 12px; background: var(--bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); }
+.run-local .btn { align-self: flex-start; }
+.info-note { background: rgba(94, 225, 255, 0.06); border-color: #1f4450; color: #9fdcec; }
+
 /* ---------- footer ---------- */
 .site-footer { position: relative; padding: var(--section-pad) clamp(16px, 5vw, 72px) 0; overflow: hidden; border-top: 1px solid #262521; }
 .footer-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 70px; }
 .footer-cta h2 { font-size: clamp(30px, 4vw, 52px); font-weight: 800; letter-spacing: -0.02em; max-width: 680px; line-height: 1.05; }
 .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 30px; padding-bottom: 50px; }
 .footer-label { font-size: 10px; color: var(--accent); margin-bottom: 14px; }
+.footer-gh { color: var(--accent); text-decoration: none; font-weight: 600; display: inline-block; margin-top: 12px; }
+.footer-gh:hover { text-decoration: underline; }
 .footer-grid nav { display: flex; flex-direction: column; gap: 8px; }
 .footer-grid nav a { color: var(--text); text-decoration: none; font-size: 15px; }
 .footer-grid nav a:hover { color: var(--accent); }

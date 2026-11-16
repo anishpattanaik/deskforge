@@ -7,7 +7,9 @@ import SpecSheets from "./site/SpecSheets.jsx";
 import Faq from "./site/Faq.jsx";
 import Footer from "./site/Footer.jsx";
 import Generator from "./Generator.jsx";
+import StaticGenerator from "./StaticGenerator.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
+import { STATIC } from "./api.js";
 
 export default function App() {
   return (
@@ -22,9 +24,7 @@ export default function App() {
         <SpecSheets />
         <Faq />
         <section className="generator-section" id="generator">
-          <ErrorBoundary>
-            <Generator />
-          </ErrorBoundary>
+          <ErrorBoundary>{STATIC ? <StaticGenerator /> : <Generator />}</ErrorBoundary>
         </section>
       </main>
       <Footer />

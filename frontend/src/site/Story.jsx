@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { api } from "../api.js";
+import { loadDemoModel } from "../api.js";
 import { useStlGeometry } from "../components/Viewer.jsx";
 import ErrorBoundary from "../components/ErrorBoundary.jsx";
 import { prefersReducedMotion, useScramble, useSectionProgressRef } from "./hooks.js";
@@ -44,12 +44,7 @@ function useDemoModel() {
     let alive = true;
     (async () => {
       try {
-        const demo = await api.demo();
-        const items = demo.analysis.items
-          .filter((i) => i.include_in_organizer)
-          .map((i, n) => ({ id: `d${n}`, label: i.name, length_mm: i.length_mm, width_mm: i.width_mm, height_mm: i.height_mm, quantity: i.quantity }));
-        const cables = demo.analysis.cables.map((c) => ({ label: c.cable_type, diameter_mm: c.diameter_mm, count: c.count }));
-        const res = await api.generate({ items, cables, settings: { front_text: "DESKFORGE" } });
+        const res = await loadDemoModel();
         if (alive) setResult(res);
       } catch (e) {
         if (alive) setError(e.message);

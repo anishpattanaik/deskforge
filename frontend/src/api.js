@@ -1,5 +1,30 @@
 // Thin fetch wrapper: every backend error arrives as {error: {code, message, hint}}.
 
+// STATIC = built for GitHub Pages (no server). The site then reads pre-built demo
+// files from public/demo/ instead of calling the API.
+export const STATIC = import.meta.env.VITE_STATIC === "1";
+export const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
+async function staticJson(path) {
+  const res = await fetch(asset(path));
+  if (!res.ok) throw new Error(`Missing demo file ${path}`);
+  return res.json();
+}
+
+/** The demo organizer: generated live by the server, or pre-built for the static site. */
+export async function loadDemoModel() {
+  if (STATIC) {
+    const model = await staticJson("demo/model.json");
+    return { ...model, stl_url: asset(model.stl_url) };
+  }
+  const demo = await api.demo();
+  const items = demo.analysis.items
+    .filter((i) => i.include_in_organizer)
+    .map((i, n) => ({ id: `d${n}`, label: i.name, length_mm: i.length_mm, width_mm: i.width_mm, height_mm: i.height_mm, quantity: i.quantity }));
+  const cables = demo.analysis.cables.map((c) => ({ label: c.cable_type, diameter_mm: c.diameter_mm, count: c.count }));
+  return api.generate({ items, cables, settings: { front_text: "DESKFORGE" } });
+}
+
 export class ApiError extends Error {
   constructor(message, { code = "error", hint = null, status = 0 } = {}) {
     super(message);
@@ -39,7 +64,7 @@ async function request(path, options = {}) {
 
 export const api = {
   health: () => request("/api/health"),
-  demo: () => request("/api/demo"),
+  demo: () => (STATIC ? staticJson("demo/analysis.json") : request("/api/demo")),
   references: () => request("/api/references"),
   analyze: (file, { demoFallback = false, reference = null, signal } = {}) => {
     const form = new FormData();

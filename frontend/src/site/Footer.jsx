@@ -32,6 +32,7 @@ export default function Footer() {
         <div>
           <div className="mono footer-label">[ STACK ]</div>
           <p className="muted mono small">REACT · THREE.JS · FASTAPI · CADQUERY · CLAUDE · QWEN2.5-VL · OLLAMA</p>
+          <p><a className="footer-gh" href="https://github.com/anishpattanaik/deskforge" target="_blank" rel="noreferrer">★ Source on GitHub →</a></p>
         </div>
       </div>
       <div className="footer-word" aria-hidden>DESKFORGE</div>

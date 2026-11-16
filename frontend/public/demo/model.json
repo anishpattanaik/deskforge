@@ -1,0 +1,107 @@
+{
+ "model_id": "demo",
+ "stl_url": "demo/organizer.stl",
+ "size_mm": [
+  236.0,
+  207.5,
+  25.4
+ ],
+ "volume_cm3": 181.8,
+ "est_filament_g": 124.0,
+ "triangle_count": 51852,
+ "generation_ms": 3555,
+ "pockets": [
+  {
+   "id": "d4",
+   "label": "Sticky notes",
+   "x": 2.0,
+   "y": 2.0,
+   "w": 79.345,
+   "d": 79.0,
+   "wall_h": 12.0
+  },
+  {
+   "id": "d1",
+   "label": "Smartphone",
+   "x": 83.345,
+   "y": 2.0,
+   "w": 150.655,
+   "d": 79.0,
+   "wall_h": 12.0
+  },
+  {
+   "id": "d0",
+   "label": "Wireless mouse",
+   "x": 2.0,
+   "y": 83.0,
+   "w": 136.342,
+   "d": 66.0,
+   "wall_h": 23.4
+  },
+  {
+   "id": "d2",
+   "label": "Earbuds case",
+   "x": 140.342,
+   "y": 83.0,
+   "w": 54.995,
+   "d": 66.0,
+   "wall_h": 14.4
+  },
+  {
+   "id": "d5",
+   "label": "USB flash drive",
+   "x": 197.337,
+   "y": 83.0,
+   "w": 36.663,
+   "d": 66.0,
+   "wall_h": 12.0
+  },
+  {
+   "id": "d6",
+   "label": "Keys",
+   "x": 2.0,
+   "y": 151.0,
+   "w": 85.0,
+   "d": 43.0,
+   "wall_h": 12.0
+  },
+  {
+   "id": "d3",
+   "label": "Pens",
+   "x": 89.0,
+   "y": 151.0,
+   "w": 145.0,
+   "d": 43.0,
+   "wall_h": 12.0
+  }
+ ],
+ "slots": [
+  {
+   "label": "hdmi",
+   "x": 95.8,
+   "diameter_mm": 7.5
+  },
+  {
+   "label": "ac_power",
+   "x": 109.4,
+   "diameter_mm": 6.5
+  },
+  {
+   "label": "usb_c",
+   "x": 121.25,
+   "diameter_mm": 4.0
+  },
+  {
+   "label": "usb_c",
+   "x": 131.85,
+   "diameter_mm": 4.0
+  },
+  {
+   "label": "lightning",
+   "x": 142.2,
+   "diameter_mm": 3.5
+  }
+ ],
+ "rail_y": 194.0,
+ "warnings": []
+}

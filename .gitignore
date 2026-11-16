@@ -7,3 +7,5 @@ __pycache__/
 *.stl
 # local launcher config (contains machine-specific paths)
 .claude/
+# the pre-built demo model for the static website IS committed
+!frontend/public/demo/organizer.stl

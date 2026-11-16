@@ -1,14 +1,3 @@
----
-title: DeskForge
-emoji: 🗂️
-colorFrom: yellow
-colorTo: gray
-sdk: docker
-app_port: 7860
-pinned: false
-short_description: One desk photo → a custom 3D-printable organizer
----
-
 # DeskForge: photo to printable desk organizer
 
 Snap a photo of a messy desk. An AI vision model (Claude, or a free local
@@ -17,8 +6,7 @@ millimetre estimates. A CadQuery script then compiles a custom tray with a
 pocket for each item and snap-in clips for each cable. You inspect it in a live
 3D viewer, adjust it with sliders or plain-English requests, and download the STL.
 
-**Quick start (Windows):** double-click `start.bat`. **Deploy:** see
-[Deploy (free) on Hugging Face Spaces](#deploy-free-on-hugging-face-spaces).
+**Website:** https://anishpattanaik.github.io/deskforge/ · **Run it yourself (Windows):** double-click `start.bat`.
 
 ```
  photo ──► Claude vision (structured JSON) ──► editable cards + sliders
@@ -135,22 +123,26 @@ Open http://localhost:5173. Vite proxies `/api` to the backend.
 For a single-server demo, run `npm run build`. FastAPI then serves `frontend/dist` at
 http://localhost:8000.
 
-## Deploy (free) on Hugging Face Spaces
+## Website (free) on GitHub Pages
 
-The repo is a ready-made Docker Space: the `Dockerfile` builds the website, installs
-CadQuery and serves everything on port 7860.
+Live at **https://anishpattanaik.github.io/deskforge/**. Every push to `main` rebuilds it
+automatically (`.github/workflows/pages.yml`, no secrets needed).
 
-1. Create a Space at https://huggingface.co/new-space: SDK **Docker**, template **Blank**, hardware **CPU basic (free)**.
-2. In this GitHub repo go to **Settings → Secrets and variables → Actions**, then add
-   the secret `HF_TOKEN` (a Hugging Face token with *write* access) and the variable `HF_SPACE`
-   (e.g. `your-name/deskforge`).
-3. Push to `main` (or run the *Deploy to Hugging Face Space* workflow). The Space builds itself.
+GitHub Pages has no server, so the website is built in **static mode** (`VITE_STATIC=1`):
+the landing page, 3D story and a live demo tray run entirely in the browser from
+pre-built files in `frontend/public/demo/`. The full generator (photo AI, sliders, prompt edits)
+runs on your own PC with `start.bat`. After changing the CAD code, refresh the demo files with
+`python backend/export_static_demo.py`.
 
-Online there's no Ollama, so the public site uses the **demo desk** for photos unless you add an
-`ANTHROPIC_API_KEY` secret to the Space. If you do, each visitor is limited to 8 AI calls an
-hour and 150 a day in total (`DESKFORGE_AI_PER_HOUR`, `DESKFORGE_AI_PER_DAY`), so strangers
-can't drain your credit. Sliders, CAD rebuilds and STL downloads are free to use, with only a
-basic rebuild throttle.
+One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+## Self-hosting the full generator (Docker)
+
+The `Dockerfile` builds the website plus the API and CAD engine into one container on port
+7860. It runs on any Docker host, including Hugging Face Spaces, where Docker Spaces need a paid
+plan. Online there's no Ollama, so photos use the demo desk unless you set an
+`ANTHROPIC_API_KEY`. If you do, each visitor is limited to 8 AI calls an hour and 150 a day in
+total (`DESKFORGE_AI_PER_HOUR`, `DESKFORGE_AI_PER_DAY`), so strangers can't drain your credit.
 
 ## Config
 | Env var | Default | |

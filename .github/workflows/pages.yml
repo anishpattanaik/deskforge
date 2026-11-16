@@ -1,0 +1,51 @@
+# Builds the static DeskForge website and publishes it to GitHub Pages on every push.
+# Free, no secrets needed. One-time setup: repo Settings → Pages → Source: "GitHub Actions".
+# Live at https://<user>.github.io/<repo>/
+
+name: Deploy website to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        working-directory: frontend
+        # A lockfile made on Windows can miss Linux-only optional binaries (npm bug #4828).
+        run: npm ci --no-audit --no-fund || (rm -f package-lock.json && npm install --no-audit --no-fund)
+      - name: Build static site
+        working-directory: frontend
+        env:
+          VITE_STATIC: "1"
+          VITE_BASE: /${{ github.event.repository.name }}/
+        run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
