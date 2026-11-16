@@ -11,10 +11,14 @@ short_description: One desk photo → a custom 3D-printable organizer
 
 # DeskForge: photo to printable desk organizer
 
-Snap a photo of a messy desk. Claude catalogues every loose item and cable with
+Snap a photo of a messy desk. An AI vision model (Claude, or a free local
+Qwen2.5-VL running on your own GPU) catalogues every loose item and cable with
 millimetre estimates. A CadQuery script then compiles a custom tray with a
 pocket for each item and snap-in clips for each cable. You inspect it in a live
-3D viewer, adjust it with sliders, and download the STL.
+3D viewer, adjust it with sliders or plain-English requests, and download the STL.
+
+**Quick start (Windows):** double-click `start.bat`. **Deploy:** see
+[Deploy (free) on Hugging Face Spaces](#deploy-free-on-hugging-face-spaces).
 
 ```
  photo ──► Claude vision (structured JSON) ──► editable cards + sliders
