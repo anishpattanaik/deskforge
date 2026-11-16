@@ -1,0 +1,10 @@
+**/node_modules
+frontend/dist
+backend/generated
+**/__pycache__
+**/.venv
+.git
+.github
+.claude
+*.stl
+.env

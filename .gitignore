@@ -1,0 +1,9 @@
+﻿backend/generated/
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+.venv/
+.env
+*.stl
+# local launcher config (contains machine-specific paths)
+.claude/

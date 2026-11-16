@@ -1,0 +1,30 @@
+# Every push to main redeploys the live site on Hugging Face Spaces.
+#
+# One-time setup (GitHub repo → Settings → Secrets and variables → Actions):
+#   * Secret   HF_TOKEN  = a Hugging Face access token with WRITE permission
+#   * Variable HF_SPACE  = your Space, e.g.  your-hf-username/deskforge
+# Until both exist, this workflow skips itself instead of failing.
+
+name: Deploy to Hugging Face Space
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ vars.HF_SPACE != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Push to the Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE: ${{ vars.HF_SPACE }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then echo "HF_TOKEN secret is missing"; exit 1; fi
+          HF_USER="${HF_SPACE%%/*}"
+          git push --force "https://${HF_USER}:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE}" HEAD:main
