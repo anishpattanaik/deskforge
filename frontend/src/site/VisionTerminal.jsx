@@ -10,7 +10,7 @@ const BOXES = [
   { x: 40, y: 10, w: 34, h: 16, label: "smartphone · 147×72 mm" },
   { x: 14, y: 52, w: 46, h: 7, label: "pens ×3 · 142×11 mm" },
   { x: 66, y: 44, w: 20, h: 18, label: "sticky notes · 76×76 mm" },
-  { x: 78, y: 74, w: 16, h: 11, label: "REFERENCE · bank card", ref: true },
+  { x: 70, y: 74, w: 16, h: 11, label: "REFERENCE · bank card", ref: true },
   { x: 6, y: 80, w: 62, h: 3, label: "usb_c · Ø 4.0 mm", cable: true },
 ];
 

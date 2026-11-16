@@ -60,6 +60,7 @@ button, input, select { font: inherit; color: inherit; }
 .btn:hover { border-color: var(--accent); }
 .btn:active { transform: translateY(1px); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+a.btn { color: var(--text); }
 .btn.primary { background: var(--accent); color: #181b22; border-color: var(--accent); font-weight: 600; }
 .btn.primary:hover { filter: brightness(1.08); }
 .btn.primary.pending { opacity: 0.65; }
